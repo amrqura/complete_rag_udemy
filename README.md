@@ -13,7 +13,7 @@ streamlit run main.py --server.port 5000
 #docker image
 ## Build docker image locally
 ```
-docker build -t new-law-llm .
+docker build -t complete_rag_udemy .
 ```
 After running the docker build succesfully, you can check the images using the following command:
 
@@ -24,8 +24,8 @@ docker images
 Now to make sure that the image is running locally, run the following docker command:
 
 ```
-docker run  --publish 7777:5000 new-law-llm
-docker run --gpus all -p 5000:5000 new-law-llm
+docker run  --publish 7777:5000 complete-rag-udemy
+docker run --gpus all -p 5000:5000 complete-rag-udemy
 
 ```
 You can check the docker containers with the following command:
@@ -48,7 +48,7 @@ then add the credentials
 
 ## create the ECR:
 ```
-aws ecr --region us-east-1 create-repository --repository-name ecs-newlaw-rag/home
+aws ecr --region us-east-1 create-repository --repository-name ecs-complete-rag-udemy/home
 ```
 Login to AWS ECR:
 ```
@@ -57,19 +57,19 @@ docker login -u AWS -p $(aws ecr get-login-password --region us-east-1) 47755740
 
 Tag the image with upstream tag:
 ```
-docker tag new-law-llm:latest 477557400504.dkr.ecr.us-east-1.amazonaws.com/ecs-newlaw-rag/home:latest
+docker tag complete-rag-udemy:latest 477557400504.dkr.ecr.us-east-1.amazonaws.com/ecs-complete-rag-udemy/home:latest
 ```
 
 Then push docker image to ECR:
 
 ```
-~~docker push 477557400504.dkr.ecr.us-east-1.amazonaws.com/ecs-newlaw-rag/home:latest~~
+~~docker push 477557400504.dkr.ecr.us-east-1.amazonaws.com/ecs-complete-rag-udemy/home:latest~~
 ```
 
 
 To show the docker image in AWS, visit the following link:
 ```
-https://us-east-1.console.aws.amazon.com/ecr/repositories/private/477557400504/ecs-newlaw-rag/home?region=us-east-1
+https://us-east-1.console.aws.amazon.com/ecr/repositories/private/477557400504/ecs-complete-rag-udemy/home?region=us-east-1
 ```
 
 # connect to AWS instance 
