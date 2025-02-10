@@ -1,3 +1,6 @@
+# Google colab notebook
+
+You can find the related google colab notebook [here](https://colab.research.google.com/drive/1qpyX3AaNfvgj134TJsEWs1NypHypogGT#scrollTo=m2TlrGkVi7bp) 
 # running locally
 ## Python virtual environment:
 ```
