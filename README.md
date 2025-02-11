@@ -16,7 +16,7 @@ streamlit run main.py --server.port 5000
 #docker image
 ## Build docker image locally
 ```
-docker build -t complete_rag_udemy .
+docker build -t complete-rag-udemy .
 ```
 After running the docker build succesfully, you can check the images using the following command:
 
@@ -49,24 +49,29 @@ aws configure
 ```
 then add the credentials
 
-## create the ECR:
+## create the ECR repo:
 ```
 aws ecr --region us-east-1 create-repository --repository-name ecs-complete-rag-udemy/home
 ```
 Login to AWS ECR:
 ```
-docker login -u AWS -p $(aws ecr get-login-password --region us-east-1) 477557400504.dkr.ecr.us-east-1.amazonaws.com
+# Get the AWS Account ID and AWS Region  
+export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
+export AWS_REGION=$(aws configure get region)
+# Login to ECR
+docker login -u AWS -p $(aws ecr get-login-password --region $AWS_REGION) ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
 ```
 
 Tag the image with upstream tag:
 ```
-docker tag complete-rag-udemy:latest 477557400504.dkr.ecr.us-east-1.amazonaws.com/ecs-complete-rag-udemy/home:latest
+docker tag complete-rag-udemy:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/ecs-complete-rag-udemy/home:latest
 ```
 
 Then push docker image to ECR:
 
 ```
-~~docker push 477557400504.dkr.ecr.us-east-1.amazonaws.com/ecs-complete-rag-udemy/home:latest~~
+docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/ecs-complete-rag-udemy/home:latest
+
 ```
 
 
