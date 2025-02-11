@@ -7,7 +7,8 @@ ollama serve &
 sleep 10
 
 # Pull the necessary models
-ollama pull llama3.1:70b
+ollama pull llama3:8b
+#ollama pull llama3.3:70b
 ollama pull nomic-embed-text
 
 # Start Streamlit

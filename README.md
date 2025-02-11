@@ -79,8 +79,19 @@ To show the docker image in AWS, visit the following link:
 ```
 https://us-east-1.console.aws.amazon.com/ecr/repositories/private/477557400504/ecs-complete-rag-udemy/home?region=us-east-1
 ```
+## Launching EC2 instance 
+Here are the recommendations for creating the EC2 instance:
 
-# connect to AWS instance 
+
+* Instance Type: G4dn.xlarge (8b), G4dn.12xlarge(70b)
+* Hard Disk: 60 GB
+* Image ID: Deep learning OSS NVIDIA driver AMI GPU PyTorch 2.3
+* IAM Role: Attach a role with AmazonEC2ContainerRegistryFullAccess permission.
+* Security Group: Allow inbound traffic to SSH port (22) and port 7777.
+
+
+
+## connect to AWS instance 
 chmod 600 law-llm.pem
 #ssh to Ec2 instance
 ssh -i law-llm.pem ec2-user@ec2-54-145-39-241.compute-1.amazonaws.com
