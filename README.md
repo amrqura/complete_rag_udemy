@@ -85,16 +85,16 @@ Here are the recommendations for creating the EC2 instance:
 
 * Instance Type: G4dn.xlarge (8b), G4dn.12xlarge(70b)
 * Hard Disk: 60 GB
-* Image ID: Deep learning OSS NVIDIA driver AMI GPU PyTorch 2.3
-* IAM Role: Attach a role with AmazonEC2ContainerRegistryFullAccess permission.
+* Image ID: Deep learning OSS NVIDIA driver AMI GPU PyTorch 2.5
+* IAM Role: Attach a role with AmazonEC2ContainerRegistryFullAccess policy.
 * Security Group: Allow inbound traffic to SSH port (22) and port 7777.
 
 
 
 ## connect to AWS instance 
-chmod 600 law-llm.pem
+chmod 600 udemy.pem
 #ssh to Ec2 instance
-ssh -i law-llm.pem ec2-user@ec2-54-145-39-241.compute-1.amazonaws.com
+ssh -i udemy.pem ec2-user@ec2-54-145-39-241.compute-1.amazonaws.com
 # install docker in ec2 instance 
 ## login as admin
 sudo su
@@ -104,8 +104,12 @@ yum install docker -y
 ```
 ### switch docker on
 ```
+export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
+export AWS_REGION=$(aws configure get region)
+docker login -u AWS -p $(aws ecr get-login-password --region $AWS_REGION) ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+ 
 docker login -u AWS -p $(aws ecr get-login-password --region us-east-1) 477557400504.dkr.ecr.us-east-1.amazonaws.com
-docker pull 477557400504.dkr.ecr.us-east-1.amazonaws.com/ecs-newlaw-rag/home:latest
+docker pull 477557400504.dkr.ecr.us-east-1.amazonaws.com/ecs-complete-rag-udemy/home:latest
 docker run -d --publish 7777:5000 477557400504.dkr.ecr.us-east-1.amazonaws.com/ecs-newlaw-rag/home
 docker run --gpus all -p 7777:5000 477557400504.dkr.ecr.us-east-1.amazonaws.com/ecs-newlaw-rag/home
 
