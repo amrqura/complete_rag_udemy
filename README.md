@@ -110,8 +110,8 @@ docker login -u AWS -p $(aws ecr get-login-password --region $AWS_REGION) ${AWS_
  
 docker login -u AWS -p $(aws ecr get-login-password --region us-east-1) 477557400504.dkr.ecr.us-east-1.amazonaws.com
 docker pull 477557400504.dkr.ecr.us-east-1.amazonaws.com/ecs-complete-rag-udemy/home:latest
-docker run -d --publish 7777:5000 477557400504.dkr.ecr.us-east-1.amazonaws.com/ecs-newlaw-rag/home
-docker run --gpus all -p 7777:5000 477557400504.dkr.ecr.us-east-1.amazonaws.com/ecs-newlaw-rag/home
+docker run -d --publish 7777:5000 477557400504.dkr.ecr.us-east-1.amazonaws.com/ecs-complete-rag-udemy/home
+docker run --gpus all -p 7777:5000 477557400504.dkr.ecr.us-east-1.amazonaws.com/ecs-complete-rag-udemy/home
 
 ```
 ### create IAM role 

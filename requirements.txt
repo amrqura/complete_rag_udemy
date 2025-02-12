@@ -1,4 +1,4 @@
-streamlit==1.35.0
+streamlit==1.42.0
 langchain==0.2.1
 pinecone-client==4.1.0
 sentence_transformers==3.0.0
@@ -12,4 +12,5 @@ chromadb==0.5.3
 docx2txt==0.8
 PyPDF2==3.0.1
 pypdf==4.2.0
+pysqlite3-binary==0.5.1
 python-docx==1.1.2
